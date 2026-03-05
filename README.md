@@ -2,10 +2,10 @@
 #### ** Deal Information**
 | Original Pattern | Standardized Output |
 |-----------------|---------------------|
-| Deal Number |<span style="color:red; font-weight:bold">`deal_num`</span> |
-| Acquiror name | `acq_name` |
-| Target name | `tar_name` |
-| Vendor name | `ven_name` |
+| Deal Number | 🔴`deal_num` |
+| Acquiror name | 🔴`acq_name` |
+| Target name | 🔴`tar_name` |
+| Vendor name | 🔴`ven_name` |
 
 #### **Value Multiples (Pre-deal & Post-deal)**
 | Multiple Type | Pre-deal Output | Post-deal Output |
@@ -28,7 +28,7 @@
 | Original Pattern | Standardized Output |
 |-----------------|---------------------|
 | Unnamed: 0 | `unnamed_0` |
-| Deal Number | `deal_num` |
+| Deal Number | 🔴`deal_num` |
 | Deal type | `deal_type` |
 | Deal structure | `deal_struct` |
 | Deal financing | `deal_fin` |
@@ -81,10 +81,10 @@ Foundational identifiers for M&A transactions (no suffix variants):
 
 | Raw Column Name | Standardized Name |
 |-----------------|-------------------|
-| Deal Number | `deal_num` |
-| Acquiror name | `acq_name` |
-| Target name | `tar_name` |
-| Vendor name | `ven_name` |
+| Deal Number | 🔴`deal_num` |
+| Acquiror name |🔴 `acq_name` |
+| Target name |🔴 `tar_name` |
+| Vendor name |🔴 `ven_name` |
 | **Total** | **4 fields** |
 
 ### 2. Deal Value Metrics
@@ -157,8 +157,8 @@ Each metric is standardized for **Target (tar_)**, **Acquiror (acq_)**, and **Ve
 ### B. Company Identifiers
 | Raw Column Name | Standardized Name |
 |-----------------|-------------------|
-| [Target/Acquiror/Vendor] name | `tar_name` / `acq_name` / `ven_name` |
-| [Target/Acquiror/Vendor] BvD ID number | `tar_bvd_id_num` / `acq_bvd_id_num` / `ven_bvd_id_num` |
+| [Target/Acquiror/Vendor] name | 🔴`tar_name` /🔴 `acq_name` / 🔴`ven_name` |
+| [Target/Acquiror/Vendor] BvD ID number | 🔴`tar_bvd_id_num` / 🔴`acq_bvd_id_num` / 🔴`ven_bvd_id_num` |
 | [Target/Acquiror/Vendor] Orbis ID number | `tar_orbis_id_num` / `acq_orbis_id_num` / `ven_orbis_id_num` |
 
 ### C. Industry Classification Codes (5 Classification Systems)
