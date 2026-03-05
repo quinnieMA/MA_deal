@@ -1,11 +1,17 @@
+### Color Coding Legend
+| Color Symbol | Type               | Purpose                                                                 |
+|--------------|--------------------|-------------------------------------------------------------------------|
+| 🔴 Red       | Primary Key        | Marks the unique identifier (`deal_num`) that uniquely identifies each deal |
+| 🟢 Green     | Deduplication Key  | Marks fields used to eliminate duplicate records for related entities   |
+
 ## Deal multiple ##
 #### ** Deal Information**
 | Original Pattern | Standardized Output |
 |-----------------|---------------------|
 | Deal Number | 🔴`deal_num` |
-| Acquiror name | 🔴`acq_name` |
-| Target name | 🔴`tar_name` |
-| Vendor name | 🔴`ven_name` |
+| Acquiror name | 🟢`acq_name` |
+| Target name | 🟢`tar_name` |
+| Vendor name | 🟢ven_name` |
 
 #### **Value Multiples (Pre-deal & Post-deal)**
 | Multiple Type | Pre-deal Output | Post-deal Output |
@@ -82,9 +88,9 @@ Foundational identifiers for M&A transactions (no suffix variants):
 | Raw Column Name | Standardized Name |
 |-----------------|-------------------|
 | Deal Number | 🔴`deal_num` |
-| Acquiror name |🔴 `acq_name` |
-| Target name |🔴 `tar_name` |
-| Vendor name |🔴 `ven_name` |
+| Acquiror name |🟢 `acq_name` |
+| Target name |🟢 `tar_name` |
+| Vendor name |🟢 `ven_name` |
 | **Total** | **4 fields** |
 
 ### 2. Deal Value Metrics
@@ -157,9 +163,9 @@ Each metric is standardized for **Target (tar_)**, **Acquiror (acq_)**, and **Ve
 ### B. Company Identifiers
 | Raw Column Name | Standardized Name |
 |-----------------|-------------------|
-| [Target/Acquiror/Vendor] name | 🔴`tar_name` /🔴 `acq_name` / 🔴`ven_name` |
-| [Target/Acquiror/Vendor] BvD ID number | 🔴`tar_bvd_id_num` / 🔴`acq_bvd_id_num` / 🔴`ven_bvd_id_num` |
-| [Target/Acquiror/Vendor] Orbis ID number | `tar_orbis_id_num` / `acq_orbis_id_num` / `ven_orbis_id_num` |
+| [Target/Acquiror/Vendor] name | 🟢`tar_name` /🟢 `acq_name` / 🟢`ven_name` |
+| [Target/Acquiror/Vendor] BvD ID number | 🟢`tar_bvd_id_num` / 🟢`acq_bvd_id_num` / 🟢`ven_bvd_id_num` |
+| [Target/Acquiror/Vendor] Orbis ID number | 🟢`tar_orbis_id_num` / 🟢`acq_orbis_id_num` / 🟢`ven_orbis_id_num` |
 
 ### C. Industry Classification Codes (5 Classification Systems)
 
