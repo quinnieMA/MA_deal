@@ -216,3 +216,140 @@ Each metric is standardized for **Target (tar_)**, **Acquiror (acq_)**, and **Ve
 | First avail. yr | `_fy` |
 | Year - 1 | `_y1` |
 | Year - 2 | `_y2` |
+
+## Deal industry information ##
+#### **Deal Information**
+| Original Pattern | Standardized Output |
+|-----------------|---------------------|
+| Deal Number | 🔴`deal_num` |
+| Target name | 🟢`tar_name` |
+| Target BvD ID number | 🟢`tar_bvd_id_num` |
+| Target Orbis ID number | `tar_orbis_id_num` |
+| Acquiror name | 🟢`acq_name` |
+| Acquiror BvD ID number |🟢 `acq_bvd_id_num` |
+| Acquiror Orbis ID number | `acq_orbis_id_num` |
+| Vendor name |🟢 `ven_name` |
+| Vendor BvD ID number | 🟢`ven_bvd_id_num` |
+| Vendor Orbis ID number | `ven_orbis_id_num` |
+
+#### **Target Information**
+| Original Pattern | Standardized Output |
+|-----------------|---------------------|
+| Target overview | `tar_overview` |
+| Target major sector | `tar_major_sector` |
+| Target trade description (english) | `tar_trade_descr_en` |
+| Target trade description (original language) | `tar_trade_descr_orig` |
+| Target primary business description | `tar_primary_busi_descr` |
+| Target business description(s) | `tar_busi_descr` |
+
+#### **Target Sector Codes**
+| Original Pattern | Standardized Output |
+|-----------------|---------------------|
+| Target primary BvD Sector code | `tar_primary_bvd_code` |
+| Target primary BvD Sector description | `tar_primary_bvd_descr` |
+| Target BvD Sector code(s) | `tar_bvd_codes` |
+| Target BvD Sector description(s) | `tar_bvd_descr` |
+| Target primary US SIC code | `tar_primary_sic_code` |
+| Target primary US SIC description | `tar_primary_sic_descr` |
+| Target US SIC code(s) | `tar_sic_codes` |
+| Target US SIC description(s) | `tar_sic_descr` |
+| Target primary UK SIC (2007) code | `tar_primary_uk_sic_code` |
+| Target primary UK SIC (2007) description | `tar_primary_uk_sic_descr` |
+| Target UK SIC (2007) code(s) | `tar_uk_sic_codes` |
+| Target UK SIC (2007) description(s) | `tar_uk_sic_descr` |
+| Target primary NACE Rev.2 code | `tar_primary_nace_code` |
+| Target primary NACE Rev.2 description | `tar_primary_nace_descr` |
+| Target NACE Rev.2 code(s) | `tar_nace_codes` |
+| Target NACE Rev.2 description(s) | `tar_nace_descr` |
+| Target primary NAICS 2017 code | `tar_primary_naics_code` |
+| Target primary NAICS 2017 description | `tar_primary_naics_descr` |
+| Target NAICS 2017 code(s) | `tar_naics_codes` |
+| Target NAICS 2017 description(s) | `tar_naics_descr` |
+
+#### **Acquiror Information**
+| Original Pattern | Standardized Output |
+|-----------------|---------------------|
+| Acquiror overview | `acq_overview` |
+| Acquiror major sector | `acq_major_sector` |
+| Acquiror trade description (english) | `acq_trade_descr_en` |
+| Acquiror trade description (original language) | `acq_trade_descr_orig` |
+| Acquiror primary business description | `acq_primary_busi_descr` |
+| Acquiror business description(s) | `acq_busi_descr` |
+| Acquiror primary BvD Sector code | `acq_primary_bvd_code` |
+| Acquiror primary BvD Sector description | `acq_primary_bvd_descr` |
+| Acquiror BvD Sector code(s) | `acq_bvd_codes` |
+| Acquiror BvD Sector description(s) | `acq_bvd_descr` |
+| Acquiror primary US SIC code | `acq_primary_sic_code` |
+| Acquiror primary US SIC description | `acq_primary_sic_descr` |
+| Acquiror US SIC code(s) | `acq_sic_codes` |
+| Acquiror US SIC description(s) | `acq_sic_descr` |
+| Acquiror primary UK SIC (2007) code | `acq_primary_uk_sic_code` |
+| Acquiror primary UK SIC (2007) description | `acq_primary_uk_sic_descr` |
+| Acquiror UK SIC (2007) code(s) | `acq_uk_sic_codes` |
+| Acquiror UK SIC (2007) description(s) | `acq_uk_sic_descr` |
+| Acquiror primary NACE Rev.2 code | `acq_primary_nace_code` |
+| Acquiror primary NACE Rev.2 description | `acq_primary_nace_descr` |
+| Acquiror NACE Rev.2 code(s) | `acq_nace_codes` |
+| Acquiror NACE Rev.2 description(s) | `acq_nace_descr` |
+| Acquiror primary NAICS 2017 code | `acq_primary_naics_code` |
+| Acquiror primary NAICS 2017 description | `acq_primary_naics_descr` |
+| Acquiror NAICS 2017 code(s) | `acq_naics_codes` |
+| Acquiror NAICS 2017 description(s) | `acq_naics_descr` |
+
+#### **Vendor Information**
+| Original Pattern | Standardized Output |
+|-----------------|---------------------|
+| Vendor overview | `ven_overview` |
+| Vendor major sector | `ven_major_sector` |
+| Vendor trade description (english) | `ven_trade_descr_en` |
+| Vendor trade description (original language) | `ven_trade_descr_orig` |
+| Vendor primary business description | `ven_primary_busi_descr` |
+| Vendor business description(s) | `ven_busi_descr` |
+| Vendor primary BvD Sector code | `ven_primary_bvd_code` |
+| Vendor primary BvD Sector description | `ven_primary_bvd_descr` |
+| Vendor BvD Sector code(s) | `ven_bvd_codes` |
+| Vendor BvD Sector description(s) | `ven_bvd_descr` |
+| Vendor primary US SIC code | `ven_primary_sic_code` |
+| Vendor primary US SIC description | `ven_primary_sic_descr` |
+| Vendor US SIC code(s) | `ven_sic_codes` |
+| Vendor US SIC description(s) | `ven_sic_descr` |
+| Vendor primary UK SIC (2007) code | `ven_primary_uk_sic_code` |
+| Vendor primary UK SIC (2007) description | `ven_primary_uk_sic_descr` |
+| Vendor UK SIC (2007) code(s) | `ven_uk_sic_codes` |
+| Vendor UK SIC (2007) description(s) | `ven_uk_sic_descr` |
+| Vendor primary NACE Rev.2 code | `ven_primary_nace_code` |
+| Vendor primary NACE Rev.2 description | `ven_primary_nace_descr` |
+| Vendor NACE Rev.2 code(s) | `ven_nace_codes` |
+| Vendor NACE Rev.2 description(s) | `ven_nace_descr` |
+| Vendor primary NAICS 2017 code | `ven_primary_naics_code` |
+| Vendor primary NAICS 2017 description | `ven_primary_naics_descr` |
+| Vendor NAICS 2017 code(s) | `ven_naics_codes` |
+| Vendor NAICS 2017 description(s) | `ven_naics_descr` |
+
+#### **Year Suffix Patterns**
+| Original Pattern | Standardized Output |
+|-----------------|---------------------|
+| Last avail. yr | `_ly` |
+| Year - 1 | `_y1` |
+| Year - 2 | `_y2` |
+| th USD | `_usd` |
+| 1st avail | `_1st` |
+
+#### **通用缩写转换**
+| Original Term | Standardized Output |
+|-----------------|---------------------|
+| acquiror | `acq` |
+| target | `tar` |
+| vendor | `ven` |
+| group | `gr` |
+| number | `num` |
+| description | `descr` |
+| business | `busi` |
+| last avail yr | `ly` |
+| year 1 | `y1` |
+| year 2 | `y2` |
+| first | `1st` |
+| future | `fut` |
+| multiple | `mul` |
+| estimate | `est` |
+| year | `yr` |
