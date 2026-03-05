@@ -22,13 +22,6 @@
 | Shareholders Funds | `pre_eq_mul` | `post_eq_mul` |
 | Market Capitalisation | `pre_cap_mul` | `post_cap_mul` |
 
-#### **Year Suffix Handling**
-| Year Pattern | Suffix |
-|--------------|--------|
-| Last avail. yr | `_ly` |
-| First avail. yr | `_fy` |
-| Year - 1 | `_y1` |
-| Year - 2 | `_y2` |
 
 ## Deal structure_date ##
 #### **Deal Information**
@@ -81,11 +74,80 @@
 | last_deal_comment_rationale_update_date_year | `last_comment_up_d_yr` |
 | last_update_year | `last_up_yr` |
 
-### 3. **Suffix Extraction Patterns**
-| Pattern | Suffix | Description |
-|---------|--------|-------------|
-| Last avail. yr | `_ly` | Last available year |
-| Year - 1 | `_y1` | One year prior |
-| Year - 2 | `_y2` | Two years prior |
-| th USD | `_usd` | Thousand USD |
-| 1st avail | `_1st` | First available |
+
+## Deal value ##
+### 1. Core Deal Information
+Foundational identifiers for M&A transactions (no suffix variants):
+
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| Deal Number | `deal_num` |
+| Acquiror name | `acq_name` |
+| Target name | `tar_name` |
+| Vendor name | `ven_name` |
+| **Total** | **4 fields** |
+
+### 2. Deal Value Metrics
+Monetary values for deals (11 base fields × 3 suffix variants = 33 total):
+
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| Deal value (Native currency) | `dv_local` |
+| Deal value | `dv_usd` |
+| Deal equity value (Native currency) | `eqv_local` |
+| Deal equity value | `eqv_usd` |
+| Deal enterprise value (Native currency) | `ev_local` |
+| Deal enterprise value | `ev_usd` |
+| Deal modelled enterprise value (Native currency) | `mev_local` |
+| Deal modelled enterprise value | `mev_usd` |
+| Deal total target value (Native currency) | `ttv_local` |
+| Deal total target value | `ttv_usd` |
+| Modelled Fee Income | `modeled_fee` |
+| As Reported Fee Income | `reported_fee` |
+| **Total Base Fields** | **11 fields** |
+
+### 3. Deal Structure Metrics
+Structural and performance indicators (5 base fields × 3 suffix variants = 15 total):
+
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| Initial stake (%) | `stake_init_pct` |
+| Acquired stake (%) | `stake_acq_pct` |
+| Final stake (%) | `stake_final_pct` |
+| IRR (%) | `irr_pct` |
+| Native currency | `currency` |
+| **Total Base Fields** | **5 fields** |
+
+### 4. Company Financial Metrics
+Financial indicators for Target/Acquiror/Vendor (16 metrics × 3 entity types = 48 base fields × 3 suffix variants = 144 total):
+
+Each metric is standardized for **Target (tar_)**, **Acquiror (acq_)**, and **Vendor (ven_)**:
+
+| Raw Column Pattern | Standardized Name (Target Example) |
+|--------------------|------------------------------------|
+| [Entity] operating revenue/turnover | `tar_rev` |
+| [Entity] EBITDA | `tar_ebitda` |
+| [Entity] EBIT | `tar_ebit` |
+| [Entity] profit before tax | `tar_pbt` |
+| [Entity] profit after tax | `tar_pat` |
+| [Entity] net profit | `tar_np` |
+| [Entity] total assets | `tar_ta` |
+| [Entity] net assets | `tar_na` |
+| [Entity] shareholders funds | `tar_eq` |
+| [Entity] market capitalisation | `tar_cap` |
+| [Entity] number of employees | `tar_emp` |
+| [Entity] enterprise value | `tar_ev` |
+| [Entity] earnings per share | `tar_eps` |
+| [Entity] cash flow per share | `tar_cfps` |
+| [Entity] dividend per share | `tar_dps` |
+| [Entity] book value per share | `tar_bvps` |
+| **Total Base Fields** | **48 fields (3 entities × 16 metrics)** |
+
+
+## Year Suffix Handling ##
+| Year Pattern | Suffix |
+|--------------|--------|
+| Last avail. yr | `_ly` |
+| First avail. yr | `_fy` |
+| Year - 1 | `_y1` |
+| Year - 2 | `_y2` |
