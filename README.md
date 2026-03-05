@@ -11,7 +11,7 @@
 | Deal Number | 🔴`deal_num` |
 | Acquiror name | 🟢`acq_name` |
 | Target name | 🟢`tar_name` |
-| Vendor name | 🟢ven_name` |
+| Vendor name | 🟢’ven_name` |
 
 #### **Value Multiples (Pre-deal & Post-deal)**
 | Multiple Type | Pre-deal Output | Post-deal Output |
