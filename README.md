@@ -1,218 +1,120 @@
-### Color Coding Legend
-| Color Symbol | Type               | Purpose                                                                 |
-|--------------|--------------------|-------------------------------------------------------------------------|
-| 🔴 Red       | Primary Key        | Marks the unique identifier (`deal_num`) that uniquely identifies each deal |
-| 🟢 Green     | Deduplication Key  | Marks fields used to eliminate duplicate records for related entities   |
+## Value数据量变化流程图
 
-## Deal multiple ##
-#### ** Deal Information**
-| Original Pattern | Standardized Output |
-|-----------------|---------------------|
-| Deal Number | 🔴`deal_num` |
-| Acquiror name | 🟢`acq_name` |
-| Target name | 🟢`tar_name` |
-| Vendor name | 🟢’ven_name` |
+```
+原始CSV文件 (1-2号)
+├── acquisition_value_1_cleaned.csv: 55,971 obs
+├── acquisition_value_2_cleaned.csv: 3,004 obs
+└── 合计: 58,975 obs
+         ↓
+    process_file程序清洗
+    (ID变量转字符串、n.a./n.s./-/Unknown替换为空)
+         ↓
+临时文件 (acq_value_1/2.dta): 各文件保留原观测数
+         ↓
+    append合并
+         ↓
+合并后数据集: 58,975 obs
+         ↓
+    drop if deal_value==.: 删除 3,389 obs (交易价值缺失)
+         ↓
+    按deal_num去重: 删除 0 obs (无重复)
+         ↓
+    删除冗余变量: 删除 as_reported_fee_income, stake_init_pct, 
+                  stake_acq_pct, stake_final_pct
+         ↓
+    destring所有价值变量 (从字符串转为数值)
+         ↓
+acq_value.dta: 55,586 obs
+         ↓
+    为11个价值变量生成对数版本 (ln_*)
+         ↓
+acq_value_with_ln.dta: 55,586 obs
+```
 
-#### **Value Multiples (Pre-deal & Post-deal)**
-| Multiple Type | Pre-deal Output | Post-deal Output |
-|--------------|-----------------|------------------|
-| Operating Revenue/Turnover | `pre_rev_mul` | `post_rev_mul` |
-| EBITDA | `pre_ebitda_mul` | `post_ebitda_mul` |
-| EBIT | `pre_ebit_mul` | `post_ebit_mul` |
-| Profit Before Tax | `pre_pbt_mul` | `post_pbt_mul` |
-| Profit After Tax | `pre_pat_mul` | `post_pat_mul` |
-| Net Profit | `pre_np_mul` | `post_np_mul` |
-| Total Assets | `pre_ta_mul` | `post_ta_mul` |
-| Net Assets | `pre_na_mul` | `post_na_mul` |
-| Current Liabilities | `pre_cl_mul` | `post_cl_mul` |
-| Shareholders Funds | `pre_eq_mul` | `post_eq_mul` |
-| Market Capitalisation | `pre_cap_mul` | `post_cap_mul` |
+## 完整数据量变化汇总表
 
+| 阶段 | 观测数 | 操作说明 |
+|------|--------|---------|
+| **原始数据合计** | **58,975** | 两个CSV文件总和 |
+| 合并后数据集 | 58,975 | append合并完成 |
+| 删除交易价值缺失 | 删除 3,389 | drop if deal_value==. |
+| 按deal_num去重 | 删除 0 | 无重复交易编号 |
+| **最终数据集** | **55,586** | acq_value.dta |
 
-## Deal structure_date ##
-#### **Deal Information**
-| Original Pattern | Standardized Output |
-|-----------------|---------------------|
-| Unnamed: 0 | `unnamed_0` |
-| Deal Number | 🔴`deal_num` |
-| Deal type | `deal_type` |
-| Deal structure | `deal_struct` |
-| Deal financing | `deal_fin` |
-| Deal method of payment | `deal_pay_method` |
-| Deal method of payment value th USD | `deal_pay_method_val_usd` |
-| Deal status | `deal_status` |
+## 变量说明
 
-#### **Date Fields**
-| Original Pattern | Standardized Output |
-|-----------------|---------------------|
-| Rumour date | `rumour_d` |
-| Announced date | `announced_d` |
-| Expected completion date | `expected_comp_d` |
-| Assumed completion date | `assumed_comp_d` |
-| Completed date | `completed_d` |
-| Postponed date | `postponed_d` |
-| Withdrawn date | `withdrawn_d` |
-| Last deal status date | `last_deal_status_d` |
-| Last deal value, offer price, bid premium update date | `last_deal_val_up_d` |
-| Last deal status update date | `last_deal_status_up_d` |
-| Last % of stake update date | `last_pct_stake_up_d` |
-| Last acquiror, target, vendor update date | `last_acq_tar_ven_up_d` |
-| Last advisor update date | `last_advisor_up_d` |
-| Last deal comment, rationale update date | `last_comment_up_d` |
-| Last update | `last_up` |
+### 核心交易价值变量 (11个)
+| 变量名 | 含义 |
+|--------|------|
+| `deal_value` | 交易价值(美元) |
+| `deal_value_native_currency` | 交易价值(本币) |
+| `deal_equity_value` | 股权价值(美元) |
+| `deal_equity_value_native_currenc` | 股权价值(本币) |
+| `deal_enterprise_value` | 企业价值(美元) |
+| `deal_enterprise_value_native_cur` | 企业价值(本币) |
+| `deal_modelled_enterprise_value` | 模型企业价值(美元) |
+| `deal_modelled_enterprise_value_n` | 模型企业价值(本币) |
+| `deal_total_target_value` | 目标公司总价值(美元) |
+| `deal_total_target_value_native_c` | 目标公司总价值(本币) |
+| `modelled_fee_income` | 模型费用收入 |
 
-#### **Year Fields** (Derived from Dates)
-| Original Pattern | Standardized Output |
-|-----------------|---------------------|
-| rumour_date_year | `rumour_d_yr` |
-| announced_date_year | `announced_d_yr` |
-| expected_completion_date_year | `expected_comp_d_yr` |
-| assumed_completion_date_year | `assumed_comp_d_yr` |
-| completed_date_year | `completed_d_yr` |
-| postponed_date_year | `postponed_d_yr` |
-| withdrawn_date_year | `withdrawn_d_yr` |
-| last_deal_status_date_year | `last_deal_status_d_yr` |
-| last_deal_value_offer_price_bid_premium_update_date_year | `last_deal_val_up_d_yr` |
-| last_deal_status_update_date_year | `last_deal_status_up_d_yr` |
-| last_pct_of_stake_update_date_year | `last_pct_stake_up_d_yr` |
-| last_acquiror_target_vendor_update_date_year | `last_acq_tar_ven_up_d_yr` |
-| last_advisor_update_date_year | `last_advisor_up_d_yr` |
-| last_deal_comment_rationale_update_date_year | `last_comment_up_d_yr` |
-| last_update_year | `last_up_yr` |
+### 删除的变量 (4个)
+| 变量名 | 含义 |
+|--------|------|
+| `as_reported_fee_income` | 报告费用收入 |
+| `stake_init_pct` | 初始持股比例 |
+| `stake_acq_pct` | 收购持股比例 |
+| `stake_final_pct` | 最终持股比例 |
 
+### 生成的对数变量 (11个)
+| 变量名 | 来源 |
+|--------|------|
+| `ln_value` | deal_value |
+| `ln_value_native_currency` | deal_value_native_currency |
+| `ln_equity_value` | deal_equity_value |
+| `ln_equity_value_native_currenc` | deal_equity_value_native_currenc |
+| `ln_enterprise_value` | deal_enterprise_value |
+| `ln_enterprise_value_native_cur` | deal_enterprise_value_native_cur |
+| `ln_modelled_enterprise_value` | deal_modelled_enterprise_value |
+| `ln_modelled_enterprise_value_n` | deal_modelled_enterprise_value_n |
+| `ln_total_target_value` | deal_total_target_value |
+| `ln_total_target_value_native_c` | deal_total_target_value_native_c |
+| `ln_modelled_fee_income` | modelled_fee_income |
 
-## Deal value ##
-### 1. Core Deal Information
-Foundational identifiers for M&A transactions (no suffix variants):
+## 缺失值情况
 
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| Deal Number | 🔴`deal_num` |
-| Acquiror name |🟢 `acq_name` |
-| Target name |🟢 `tar_name` |
-| Vendor name |🟢 `ven_name` |
-| **Total** | **4 fields** |
+| 变量 | 缺失值数量 | 缺失率 |
+|------|-----------|--------|
+| `deal_value` | 0 | 0% |
+| `deal_enterprise_value` | 52,687 | 94.8% |
+| `deal_enterprise_value_native_cur` | 52,687 | 94.8% |
+| `deal_equity_value` | 30,455 | 54.8% |
+| `deal_total_target_value` | 13,300 | 23.9% |
+| `modelled_fee_income` | 10,606 | 19.1% |
 
-### 2. Deal Value Metrics
-Monetary values for deals (11 base fields × 3 suffix variants = 33 total):
+## 关键观察
 
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| Deal value (Native currency) | `dv_local` |
-| Deal value | `dv_usd` |
-| Deal equity value (Native currency) | `eqv_local` |
-| Deal equity value | `eqv_usd` |
-| Deal enterprise value (Native currency) | `ev_local` |
-| Deal enterprise value | `ev_usd` |
-| Deal modelled enterprise value (Native currency) | `mev_local` |
-| Deal modelled enterprise value | `mev_usd` |
-| Deal total target value (Native currency) | `ttv_local` |
-| Deal total target value | `ttv_usd` |
-| Modelled Fee Income | `modeled_fee` |
-| As Reported Fee Income | `reported_fee` |
-| **Total Base Fields** | **11 fields** |
+1. **原始数据总量**：58,975条观测，来自2个批次文件
+   - 文件1: 55,971 obs (95%)
+   - 文件2: 3,004 obs (5%)
 
-### 3. Deal Structure Metrics
-Structural and performance indicators (5 base fields × 3 suffix variants = 15 total):
+2. **交易价值缺失**：删除3,389条交易价值缺失的记录(5.7%)
 
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| Initial stake (%) | `stake_init_pct` |
-| Acquired stake (%) | `stake_acq_pct` |
-| Final stake (%) | `stake_final_pct` |
-| IRR (%) | `irr_pct` |
-| Native currency | `currency` |
-| **Total Base Fields** | **5 fields** |
+3. **无重复交易**：按deal_num去重后无删除，说明每个交易编号唯一
 
-### 4. Company Financial Metrics
-Financial indicators for Target/Acquiror/Vendor (16 metrics × 3 entity types = 48 base fields × 3 suffix variants = 144 total):
+4. **变量精简**：删除了4个不常用变量(stake比例等)
 
-Each metric is standardized for **Target (tar_)**, **Acquiror (acq_)**, and **Vendor (ven_)**:
+5. **缺失值分析**：
+   - `deal_value`最完整(无缺失)
+   - 企业价值类变量缺失严重(~95%)
+   - 股权价值缺失约55%
+   - 目标公司总价值和费用收入相对完整(缺失20-24%)
 
-| Raw Column Pattern | Standardized Name (Target Example) |
-|--------------------|------------------------------------|
-| [Entity] operating revenue/turnover | `tar_rev` |
-| [Entity] EBITDA | `tar_ebitda` |
-| [Entity] EBIT | `tar_ebit` |
-| [Entity] profit before tax | `tar_pbt` |
-| [Entity] profit after tax | `tar_pat` |
-| [Entity] net profit | `tar_np` |
-| [Entity] total assets | `tar_ta` |
-| [Entity] net assets | `tar_na` |
-| [Entity] shareholders funds | `tar_eq` |
-| [Entity] market capitalisation | `tar_cap` |
-| [Entity] number of employees | `tar_emp` |
-| [Entity] enterprise value | `tar_ev` |
-| [Entity] earnings per share | `tar_eps` |
-| [Entity] cash flow per share | `tar_cfps` |
-| [Entity] dividend per share | `tar_dps` |
-| [Entity] book value per share | `tar_bvps` |
-| **Total Base Fields** | **48 fields (3 entities × 16 metrics)** |
+6. **对数变换**：为11个价值变量生成对数版本，用于后续回归分析中的正态化处理
 
-## Deal overview ## 
-### A. Company Overview Information
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| [Target/Acquiror/Vendor] overview | `tar_overview` / `acq_overview` / `ven_overview` |
-| [Target/Acquiror/Vendor] major sector | `tar_major_sector` / `acq_major_sector` / `ven_major_sector` |
-| [Target/Acquiror/Vendor] trade description (english) | `tar_trade_descr_en` / `acq_trade_descr_en` / `ven_trade_descr_en` |
-| [Target/Acquiror/Vendor] trade description (original language) | `tar_trade_descr_orig` / `acq_trade_descr_orig` / `ven_trade_descr_orig` |
-| [Target/Acquiror/Vendor] primary business description | `tar_primary_busi_descr` / `acq_primary_busi_descr` / `ven_primary_busi_descr` |
-| [Target/Acquiror/Vendor] business description(s) | `tar_busi_descr` / `acq_busi_descr` / `ven_busi_descr` |
+## 核心用途
 
-### B. Company Identifiers
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| [Target/Acquiror/Vendor] name | 🟢`tar_name` /🟢 `acq_name` / 🟢`ven_name` |
-| [Target/Acquiror/Vendor] BvD ID number | 🟢`tar_bvd_id_num` / 🟢`acq_bvd_id_num` / 🟢`ven_bvd_id_num` |
-| [Target/Acquiror/Vendor] Orbis ID number | 🟢`tar_orbis_id_num` / 🟢`acq_orbis_id_num` / 🟢`ven_orbis_id_num` |
-
-### C. Industry Classification Codes (5 Classification Systems)
-
-#### 1. BvD Sector (Bureau van Dijk Industry Classification)
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| primary BvD Sector code | `tar_primary_bvd_code` / `acq_primary_bvd_code` / `ven_primary_bvd_code` |
-| primary BvD Sector description | `tar_primary_bvd_descr` / `acq_primary_bvd_descr` / `ven_primary_bvd_descr` |
-| BvD Sector code(s) | `tar_bvd_codes` / `acq_bvd_codes` / `ven_bvd_codes` |
-| BvD Sector description(s) | `tar_bvd_descr` / `acq_bvd_descr` / `ven_bvd_descr` |
-
-#### 2. US SIC (Standard Industrial Classification)
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| primary US SIC code | `tar_primary_sic_code` / `acq_primary_sic_code` / `ven_primary_sic_code` |
-| primary US SIC description | `tar_primary_sic_descr` / `acq_primary_sic_descr` / `ven_primary_sic_descr` |
-| US SIC code(s) | `tar_sic_codes` / `acq_sic_codes` / `ven_sic_codes` |
-| US SIC description(s) | `tar_sic_descr` / `acq_sic_descr` / `ven_sic_descr` |
-
-#### 3. UK SIC 2007 (UK Standard Industrial Classification 2007)
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| primary UK SIC (2007) code | `tar_primary_uk_sic_code` / `acq_primary_uk_sic_code` / `ven_primary_uk_sic_code` |
-| primary UK SIC (2007) description | `tar_primary_uk_sic_descr` / `acq_primary_uk_sic_descr` / `ven_primary_uk_sic_descr` |
-| UK SIC (2007) code(s) | `tar_uk_sic_codes` / `acq_uk_sic_codes` / `ven_uk_sic_codes` |
-| UK SIC (2007) description(s) | `tar_uk_sic_descr` / `acq_uk_sic_descr` / `ven_uk_sic_descr` |
-
-#### 4. NACE Rev.2 (EU Industrial Classification)
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| primary NACE Rev.2 code | `tar_primary_nace_code` / `acq_primary_nace_code` / `ven_primary_nace_code` |
-| primary NACE Rev.2 description | `tar_primary_nace_descr` / `acq_primary_nace_descr` / `ven_primary_nace_descr` |
-| NACE Rev.2 code(s) | `tar_nace_codes` / `acq_nace_codes` / `ven_nace_codes` |
-| NACE Rev.2 description(s) | `tar_nace_descr` / `acq_nace_descr` / `ven_nace_descr` |
-
-#### 5. NAICS 2017 (North American Industry Classification System 2017)
-| Raw Column Name | Standardized Name |
-|-----------------|-------------------|
-| primary NAICS 2017 code | `tar_primary_naics_code` / `acq_primary_naics_code` / `ven_primary_naics_code` |
-| primary NAICS 2017 description | `tar_primary_naics_descr` / `acq_primary_naics_descr` / `ven_primary_naics_descr` |
-| NAICS 2017 code(s) | `tar_naics_codes` / `acq_naics_codes` / `ven_naics_codes` |
-| NAICS 2017 description(s) | `tar_naics_descr` / `acq_naics_descr` / `ven_naics_descr` |
-
-## Year Suffix Handling ##
-| Year Pattern | Suffix |
-|--------------|--------|
-| Last avail. yr | `_ly` |
-| First avail. yr | `_fy` |
-| Year - 1 | `_y1` |
-| Year - 2 | `_y2` |
+这个数据集提供交易的**各种价值指标**，包括美元价值和本币价值，以及相应的对数变换版本，用于后续的：
+- 交易规模分析
+- 估值研究
+- 回归模型中的因变量或控制变量
