@@ -2,7 +2,7 @@
 #### ** Deal Information**
 | Original Pattern | Standardized Output |
 |-----------------|---------------------|
-| Deal Number | `deal_num` |
+| Deal Number |<span style="color:red; font-weight:bold">`deal_num`</span> |
 | Acquiror name | `acq_name` |
 | Target name | `tar_name` |
 | Vendor name | `ven_name` |
@@ -143,6 +143,65 @@ Each metric is standardized for **Target (tar_)**, **Acquiror (acq_)**, and **Ve
 | [Entity] book value per share | `tar_bvps` |
 | **Total Base Fields** | **48 fields (3 entities × 16 metrics)** |
 
+## Deal overview ## 
+### A. Company Overview Information
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| [Target/Acquiror/Vendor] overview | `tar_overview` / `acq_overview` / `ven_overview` |
+| [Target/Acquiror/Vendor] major sector | `tar_major_sector` / `acq_major_sector` / `ven_major_sector` |
+| [Target/Acquiror/Vendor] trade description (english) | `tar_trade_descr_en` / `acq_trade_descr_en` / `ven_trade_descr_en` |
+| [Target/Acquiror/Vendor] trade description (original language) | `tar_trade_descr_orig` / `acq_trade_descr_orig` / `ven_trade_descr_orig` |
+| [Target/Acquiror/Vendor] primary business description | `tar_primary_busi_descr` / `acq_primary_busi_descr` / `ven_primary_busi_descr` |
+| [Target/Acquiror/Vendor] business description(s) | `tar_busi_descr` / `acq_busi_descr` / `ven_busi_descr` |
+
+### B. Company Identifiers
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| [Target/Acquiror/Vendor] name | `tar_name` / `acq_name` / `ven_name` |
+| [Target/Acquiror/Vendor] BvD ID number | `tar_bvd_id_num` / `acq_bvd_id_num` / `ven_bvd_id_num` |
+| [Target/Acquiror/Vendor] Orbis ID number | `tar_orbis_id_num` / `acq_orbis_id_num` / `ven_orbis_id_num` |
+
+### C. Industry Classification Codes (5 Classification Systems)
+
+#### 1. BvD Sector (Bureau van Dijk Industry Classification)
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| primary BvD Sector code | `tar_primary_bvd_code` / `acq_primary_bvd_code` / `ven_primary_bvd_code` |
+| primary BvD Sector description | `tar_primary_bvd_descr` / `acq_primary_bvd_descr` / `ven_primary_bvd_descr` |
+| BvD Sector code(s) | `tar_bvd_codes` / `acq_bvd_codes` / `ven_bvd_codes` |
+| BvD Sector description(s) | `tar_bvd_descr` / `acq_bvd_descr` / `ven_bvd_descr` |
+
+#### 2. US SIC (Standard Industrial Classification)
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| primary US SIC code | `tar_primary_sic_code` / `acq_primary_sic_code` / `ven_primary_sic_code` |
+| primary US SIC description | `tar_primary_sic_descr` / `acq_primary_sic_descr` / `ven_primary_sic_descr` |
+| US SIC code(s) | `tar_sic_codes` / `acq_sic_codes` / `ven_sic_codes` |
+| US SIC description(s) | `tar_sic_descr` / `acq_sic_descr` / `ven_sic_descr` |
+
+#### 3. UK SIC 2007 (UK Standard Industrial Classification 2007)
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| primary UK SIC (2007) code | `tar_primary_uk_sic_code` / `acq_primary_uk_sic_code` / `ven_primary_uk_sic_code` |
+| primary UK SIC (2007) description | `tar_primary_uk_sic_descr` / `acq_primary_uk_sic_descr` / `ven_primary_uk_sic_descr` |
+| UK SIC (2007) code(s) | `tar_uk_sic_codes` / `acq_uk_sic_codes` / `ven_uk_sic_codes` |
+| UK SIC (2007) description(s) | `tar_uk_sic_descr` / `acq_uk_sic_descr` / `ven_uk_sic_descr` |
+
+#### 4. NACE Rev.2 (EU Industrial Classification)
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| primary NACE Rev.2 code | `tar_primary_nace_code` / `acq_primary_nace_code` / `ven_primary_nace_code` |
+| primary NACE Rev.2 description | `tar_primary_nace_descr` / `acq_primary_nace_descr` / `ven_primary_nace_descr` |
+| NACE Rev.2 code(s) | `tar_nace_codes` / `acq_nace_codes` / `ven_nace_codes` |
+| NACE Rev.2 description(s) | `tar_nace_descr` / `acq_nace_descr` / `ven_nace_descr` |
+
+#### 5. NAICS 2017 (North American Industry Classification System 2017)
+| Raw Column Name | Standardized Name |
+|-----------------|-------------------|
+| primary NAICS 2017 code | `tar_primary_naics_code` / `acq_primary_naics_code` / `ven_primary_naics_code` |
+| primary NAICS 2017 description | `tar_primary_naics_descr` / `acq_primary_naics_descr` / `ven_primary_naics_descr` |
+| NAICS 2017 code(s) | `tar_naics_codes` / `acq_naics_codes` / `ven_naics_codes` |
+| NAICS 2017 description(s) | `tar_naics_descr` / `acq_naics_descr` / `ven_naics_descr` |
 
 ## Year Suffix Handling ##
 | Year Pattern | Suffix |
