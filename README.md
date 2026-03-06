@@ -80,7 +80,6 @@
 | last_deal_comment_rationale_update_date_year | `last_comment_up_d_yr` |
 | last_update_year | `last_up_yr` |
 
-
 ## Deal value ##
 ### 1. Core Deal Information
 Foundational identifiers for M&A transactions (no suffix variants):
